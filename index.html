@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NITROGEN GYM</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    background:black;
+    font-family:'Oswald', sans-serif;
+    color:red;
+}
+
+/* HEADER IMAGE */
+.header-image{
+    width:100%;
+    height:350px;
+    background:url('header.jpg') center/cover no-repeat;
+}
+
+/* EQUIPMENT TITLE */
+.equipment-title{
+    text-align:center;
+    font-size:38px;
+    margin:40px 0;
+    letter-spacing:3px;
+}
+
+/* EQUIPMENT GRID */
+.equipment-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:30px;
+    padding:0 40px 60px 40px;
+}
+
+.equipment-card{
+    border:2px solid red;
+    border-radius:20px;
+    padding:30px 20px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.equipment-card:hover{
+    background:#111;
+    transform:scale(1.05);
+}
+
+.equipment-card h3{
+    font-size:26px;
+    margin:0;
+}
+
+/* MODAL BACKDROP */
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.85);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+}
+
+/* MODAL CONTENT */
+.modal-content{
+    width:85%;
+    max-width:900px;
+    background:black;
+    border:2px solid red;
+    border-radius:20px;
+    padding:40px;
+    position:relative;
+    max-height:85vh;
+    overflow-y:auto;
+}
+
+/* CLOSE BUTTON */
+.close-btn{
+    position:absolute;
+    top:15px;
+    right:20px;
+    font-size:28px;
+    cursor:pointer;
+}
+
+/* EQUIPMENT NAME */
+.modal h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+/* EXERCISE ITEM */
+.exercise{
+    margin-bottom:35px;
+}
+
+.exercise h4{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.image-placeholder{
+    width:100%;
+    height:200px;
+    border:1px dashed red;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+}
+
+/* PLANS & LOCATION (UNCHANGED STYLE KEPT) */
+
+.section{
+    padding:60px 40px;
+    text-align:center;
+    border-top:1px solid red;
+}
+
+a{
+    color:red;
+    text-decoration:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header-image"></div>
+
+<div class="equipment-title">
+EQUIPMENT AVAILABLE
+</div>
+
+<!-- EQUIPMENT SECTION -->
+<div class="equipment-grid">
+
+<div class="equipment-card" onclick="openModal('Dumbbells')">
+<h3>Dumbbells</h3>
+</div>
+
+<div class="equipment-card" onclick="openModal('Treadmill')">
+<h3>Treadmill</h3>
+</div>
+
+<div class="equipment-card" onclick="openModal('Cable Machine')">
+<h3>Cable Machine</h3>
+</div>
+
+<div class="equipment-card" onclick="openModal('Bench Press')">
+<h3>Bench Press</h3>
+</div>
+
+<div class="equipment-card" onclick="openModal('Lat Pulldown')">
+<h3>Lat Pulldown</h3>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="equipmentModal">
+<div class="modal-content">
+
+<div class="close-btn" onclick="closeModal()">❌</div>
+
+<h2 id="equipmentName"></h2>
+
+<div id="exerciseContainer"></div>
+
+</div>
+</div>
+
+<!-- PLANS SECTION (UNCHANGED) -->
+<div class="section">
+<h2>PLANS</h2>
+<p>Joining – 1500/-</p>
+<p>Monthly – 600/-</p>
+</div>
+
+<!-- LOCATION SECTION (UNCHANGED) -->
+<div class="section">
+<h2>LOCATION</h2>
+<a href="https://maps.app.goo.gl/AsagDupfQSvw7a4j6?g_st=aw" target="_blank">
+Open in Google Maps
+</a>
+</div>
+
+<script>
+
+const equipmentData = {
+
+"Dumbbells":[
+"Shoulder Press",
+"Bicep Curl",
+"Lunges"
+],
+
+"Treadmill":[
+"Walking",
+"Jogging",
+"Sprint Intervals"
+],
+
+"Cable Machine":[
+"Cable Fly",
+"Tricep Pushdown",
+"Cable Row"
+],
+
+"Bench Press":[
+"Flat Bench Press",
+"Incline Bench Press",
+"Dumbbell Press"
+],
+
+"Lat Pulldown":[
+"Wide Grip Pulldown",
+"Close Grip Pulldown",
+"Reverse Grip Pulldown"
+]
+
+};
+
+function openModal(name){
+document.getElementById("equipmentName").innerText = name;
+
+const container = document.getElementById("exerciseContainer");
+container.innerHTML="";
+
+equipmentData[name].forEach(ex=>{
+container.innerHTML += `
+<div class="exercise">
+<h4>${ex}</h4>
+<div class="image-placeholder">
+Add Image Here
+</div>
+</div>
+`;
+});
+
+document.getElementById("equipmentModal").style.display="flex";
+}
+
+function closeModal(){
+document.getElementById("equipmentModal").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
